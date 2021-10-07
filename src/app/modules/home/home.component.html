@@ -1,0 +1,49 @@
+<main>
+
+  <div *ngIf="data; else loading">
+
+    <h4 class="font-bold pb-2 mt-12 text-lg">
+      <span class="link-hover" [routerLink]="['characters']">Characters ({{data.characters.info.count}})</span>
+    </h4>
+    <div class="hr-highlight"></div>
+
+    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+      <ng-container *ngFor="let character of data.characters.results | slice:0:6; trackBy: trackByFn">
+        <app-character [character]="character"></app-character>
+      </ng-container>
+
+    </div>
+
+    <h4 class="font-bold pb-2 mt-12 text-lg">
+      <span class="link-hover" [routerLink]="['episodes']">Episodes ({{data.episodes.info.count}})</span>
+    </h4>
+    <div class="hr-highlight"></div>
+
+    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+      <ng-container *ngFor="let episode of data.episodes.results | slice:0:6; trackBy: trackByFn">
+        <app-episode [episode]="episode"></app-episode>
+      </ng-container>
+
+    </div>
+
+
+    <h4 class="font-bold pb-2 mt-12 text-lg">
+      <span class="link-hover" [routerLink]="['locations']">Locations ({{data.locations.info.count}})</span>
+    </h4>
+    <div class="hr-highlight"></div>
+
+    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <ng-container *ngFor="let location of data.locations.results | slice:0:6; trackBy: trackByFn">
+        <app-location [location]="location"></app-location>
+      </ng-container>
+    </div>
+
+  </div>
+
+  <ng-template #loading>
+    Loading stuff...
+  </ng-template>
+
+</main>

@@ -1,0 +1,29 @@
+<div class="card hover:shadow-lg flex md:flex-col">
+  <img [src]="character.image" [alt]="character.name" class="w-48 object-cover md:h-72 md:w-full">
+  <div class="m-4">
+    <div>
+        <span class="font-bold text-2xl link-hover" [routerLink]="['/characters/', character.id]">{{character.name}}</span>
+    </div>
+    <div class="bg-gray-500 h-2.5 inline-block mr-1.5 rounded-full w-2.5"
+    [ngClass]="{
+      'bg-green-500': character.status === 'Alive',
+      'bg-red-700': character.status === 'Dead'
+    }"></div>
+    <span class="text-gray-500 text-sm">
+        <span class="link-hover" (click)="navigateToCharacters({status: character.status})">{{character.status}}</span>
+        <span> - </span>
+        <span class="link-hover" (click)="navigateToCharacters({species: character.species})">{{character.species}}</span>
+    </span>
+
+    <span class="block mt-4 text-gray-400">Last known location:</span>
+    <span class="font-bold link-hover" [routerLink]="['/locations/', character.location.id]">{{character.location.name}}</span>
+
+    <span class="block mt-4 text-gray-400">First seen in:</span>
+    
+    <ng-container *ngFor="let episode of character.episode | slice:0:1; trackBy: trackByFn">
+      <span class="font-bold link-hover"
+      [routerLink]="['/episodes/', episode.id]">{{episode.name}}</span>
+    </ng-container>
+  </div>
+
+</div>

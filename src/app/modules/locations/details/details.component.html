@@ -1,0 +1,36 @@
+<div *ngIf="loading; else mainTemplate">
+    Loading stuff...
+</div>
+
+<ng-template #mainTemplate>
+
+    <main>
+    
+        <header class="mt-4">
+          <h2 class="text-gray-700 text-6xl font-semibold leading-none tracking-wider">{{location.name}}</h2>
+          <div class="hr-highlight"></div>
+        </header>
+    
+        <div>
+            <h4 class="mt-8 font-semibold tracking-wider">Type</h4>
+            <div class="font-bold text-2xl"
+            (click)="navigateToLocations({type: location.type})">{{location.type}}</div>
+    
+            <h4 class="mt-8 font-semibold tracking-wider">Dimension</h4>
+            <div class="font-bold text-2xl"
+                (click)="navigateToLocations({dimension: location.dimension})">{{location.dimension}}</div>
+    
+            <h4 class="mt-8 font-semibold tracking-wider">Residents ({{location.residents.length}}): </h4>
+            <div class="mt-2 grid gap-2.5 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <ng-container *ngFor="let resident of location.residents; trackBy: trackByFn">
+                    <div class="mb-4 cursor-pointer" [routerLink]="['/characters', resident.id]">
+                        <img [src]="resident.image" [alt]="resident.name" class="object-cover">
+                        <h3 class="text-lg font-semibold tracking-wider">{{resident.name}}</h3>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+      
+      </main>
+
+</ng-template>

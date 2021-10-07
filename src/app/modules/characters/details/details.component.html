@@ -1,0 +1,70 @@
+<div *ngIf="loading; else mainTemplate">
+  Loading stuff...
+</div>
+
+<ng-template #mainTemplate>
+  
+  <main>
+
+    <div class="grid lg:grid-cols-2 gap-10">
+
+      <div class="lg:sticky lg:top-0 lg:h-0">
+        <div class="flex justify-center">
+          <img [src]="character.image" alt="name" class="h-96 object-cover lg:h-auto lg:w-full">
+        </div>
+
+        <header class="mt-4">
+          <h2 class="page-title custom-page-title text-center lg:text-left">{{character.name}}</h2>
+          <div class="hr-highlight hidden lg:block"></div>
+        </header>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h4 class="font-semibold tracking-wider">Gender</h4>
+          <div class="font-bold text-2xl link-hover" (click)="navigateToCharacters({gender: character.gender})">{{character.gender}}</div>
+        </div>
+        <div>
+          <h4 class="font-semibold tracking-wider">Status</h4>
+          <div class="font-bold text-2xl link-hover" (click)="navigateToCharacters({status: character.status})">{{character.status}}</div>
+        </div>
+        <div>
+          <h4 class="font-semibold tracking-wider">Species</h4>
+          <div class="font-bold text-2xl link-hover" (click)="navigateToCharacters({species: character.species})">{{character.species}}</div>
+        </div>
+        <div *ngIf="character.type">
+          <h4 class="font-semibold tracking-wider">Type</h4>
+          <div class="font-bold text-2xl link-hover" (click)="navigateToCharacters({type: character.type})">
+            {{character.type}}
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold tracking-wider">Origin</h4>
+          <div class="font-bold text-2xl">
+            <span class="block link-hover" [routerLink]="['/locations/', character.origin.id]">{{character.origin.name}}</span>
+          </div>
+        </div>
+        <div>
+          <h4 class="font-semibold tracking-wider">Last known location</h4>
+          <div class="font-bold text-2xl">
+            <span class="block link-hover" [routerLink]="['/locations/', character.location.id]">
+              {{character.location.name}}</span>
+          </div>
+        </div>
+        <div class="col-span-full">
+          <h4 class="font-semibold tracking-wider">Episodes</h4>
+          <ng-container *ngFor="let episode of character.episode; trackBy: trackByFn">
+            <div class="font-bold text-2xl mb-2">
+              <span class="link-hover" [routerLink]="['/episodes/', episode.id]">
+                {{episode.name}}
+              </span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+</ng-template>

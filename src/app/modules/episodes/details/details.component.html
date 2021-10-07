@@ -1,0 +1,32 @@
+<div *ngIf="loading; else mainTemplate">
+    Loading stuff...
+</div>
+
+<ng-template #mainTemplate>
+      
+    <main>
+
+        <header class="mt-4">
+        <h2 class="text-gray-700 text-6xl font-semibold leading-none tracking-wider">{{episode.name}}</h2>
+        <div class="hr-highlight"></div>
+        <h3 class="text-2xl font-semibold tracking-wider">{{episode.episode}}</h3>
+        </header>
+
+        <div>
+            <h4 class="mt-8 font-semibold tracking-wider">Aired date</h4>
+            <div class="font-bold text-2xl" >{{episode.air_date | date:'longDate'}}</div>
+
+            <h4 class="mt-8 font-semibold tracking-wider">Characters</h4>
+            <div class="mt-2 grid gap-2.5 grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <ng-container *ngFor="let character of episode.characters; trackBy: trackByFn">
+                    <div class="mb-4 cursor-pointer" [routerLink]="['/characters', character.id]">
+                        <img [src]="character.image" [alt]="character.name" class="object-cover">
+                        <h3 class="text-lg font-semibold tracking-wider">{{character.name}}</h3>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    
+    </main>
+  
+</ng-template>

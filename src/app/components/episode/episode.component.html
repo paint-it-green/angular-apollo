@@ -1,0 +1,16 @@
+<div class="card p-4 hover:shadow-lg">
+
+  <div class="font-bold text-2xl link-hover" [routerLink]="['/episodes', episode.id]">{{episode.name}} ({{episode.episode}})</div>
+
+  <span class="block mt-4 text-gray-400">Aired date:</span>
+  <span class="block font-bold">{{episode.air_date | date:'longDate'}}</span>
+
+  <span class="block mt-4 text-gray-400">Characters ({{episode.characters.length}}):</span>
+  <div class="flex flex-nowrap overflow-auto">
+    <ng-container *ngFor="let character of episode.characters; trackBy: trackByFn">
+      <img [src]="character.image" alt="name" class="h-8 rounded-full w-8 cursor-pointer mr-0.5 mb-1"
+        (click)="navigate(['/characters', character.id])">
+    </ng-container>
+  </div>
+
+</div>

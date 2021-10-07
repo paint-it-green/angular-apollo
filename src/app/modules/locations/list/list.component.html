@@ -1,0 +1,28 @@
+<div *ngIf="loading; else mainTemplate">
+  Loading stuff...
+</div>
+
+<ng-template #mainTemplate>
+
+  <main>
+
+    <app-page-header class="mt-4" [title]="'Locations'" [note]="info.count + ' total characters'" [filters]="filters">
+    </app-page-header>
+  
+    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+  
+      <ng-container *ngFor="let location of locations; trackBy: trackByFn">
+        <app-location [location]="location"></app-location>
+      </ng-container>
+  
+    </div>
+  
+    <div class="mt-12 flex justify-center" *ngIf="info.next">
+      <div (click)="loadMore()"
+        class="btn bg-secondary-100 text-secondary-200 inline-block hover:shadow-inner transform hover:scale-125 hover:bg-opacity-50 transition ease-out duration-300">
+        Load more</div>
+    </div>
+  
+  </main>
+
+</ng-template>

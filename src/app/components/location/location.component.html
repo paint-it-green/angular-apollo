@@ -1,0 +1,20 @@
+<div class="card p-4 hover:shadow-lg">
+
+  <div class="font-bold text-2xl link-hover" [routerLink]="['/locations', location.id]">{{location.name}}</div>
+  <span class="text-gray-500 text-sm">Type: </span>
+  <span class="text-gray-500 text-sm font-bold link-hover"
+    (click)="navigateToLocations({type: location.type})">{{location.type}}</span>
+
+  <span class="block mt-4 text-gray-400">Dimension:</span>
+  <span class="block font-bold link-hover"
+    (click)="navigateToLocations({dimension: location.dimension})">{{location.dimension}}</span>
+
+  <span class="block mt-4 text-gray-400">Residents ({{location.residents.length}}):</span>
+  <div class="flex flex-nowrap overflow-auto">
+    <ng-container *ngFor="let resident of location.residents; trackBy: trackByFn">
+      <img [src]="resident.image" alt="name" class="h-8 rounded-full w-8 cursor-pointer mr-0.5 mb-1"
+        (click)="navigate(['/characters', resident.id])">
+    </ng-container>
+  </div>
+
+</div>
